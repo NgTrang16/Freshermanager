@@ -28,6 +28,7 @@ public class Project {
     private String programingLanguage;
 
     public Project() {
+
     }
 
     public Project(String name, String manager, Date startDate, Date endDate, String status, String programingLanguage) {
