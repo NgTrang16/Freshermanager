@@ -1,5 +1,6 @@
 package com.example.FresherManager.controllers;
 
+import com.example.FresherManager.dto.CreateFresherRequest;
 import com.example.FresherManager.models.Fresher;
 import com.example.FresherManager.services.FresherService;
 import org.slf4j.Logger;
@@ -33,22 +34,22 @@ public class FresherController {
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<Fresher> createFresherById(@RequestBody Fresher fresher) {
-        return ResponseEntity.ok(fresherService.save(fresher));
+    public ResponseEntity<Fresher> createFresherById(@RequestBody CreateFresherRequest dto) {
+        return ResponseEntity.ok(fresherService.save(dto));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Fresher> updateFresherById(@PathVariable("id") Long id, @RequestBody Fresher newFresher) {
+    public ResponseEntity<Fresher> updateFresherById(@PathVariable("id") Long id, @RequestBody CreateFresherRequest dto) {
         Optional<Fresher> fresher = Optional.ofNullable(fresherService.findById(id));
         if(fresher.isPresent()) {
             Fresher updatedFresher = fresher.get();
-            updatedFresher.setName(newFresher.getName());
-            updatedFresher.setEmailFresher(newFresher.getEmailFresher());
-            updatedFresher.setProgramingLanguage(newFresher.getProgramingLanguage());
-            return ResponseEntity.ok(fresherService.save(updatedFresher));
+            updatedFresher.setName(dto.getName());
+            updatedFresher.setEmailFresher(dto.getEmailFresher());
+            updatedFresher.setProgramingLanguage(dto.getProgramingLanguage());
+            return ResponseEntity.ok(fresherService.saveFresher(updatedFresher));
         }else {
-            newFresher.setId(id);
-            return ResponseEntity.ok(fresherService.save(newFresher));
+            dto.setId(id);
+            return ResponseEntity.ok(fresherService.save(dto));
         }
     }
     @DeleteMapping("/{id}")
@@ -77,7 +78,7 @@ public class FresherController {
     }
 
     // search by programingLanguage
-    @GetMapping("/searchs")
+    @GetMapping("/search/language")
     public ResponseEntity<List<Fresher>> searchFreshersByProgramingLanguage(@RequestParam("language") String programingLanguage) {
         log.info(programingLanguage);
         List<Fresher> freshers = fresherService.searchFreshersByLanguage(programingLanguage);

@@ -12,6 +12,4 @@ public interface FresherRepository extends JpaRepository <Fresher, Long> {
     void deleteById(Long id);
 
 
-
-
 }

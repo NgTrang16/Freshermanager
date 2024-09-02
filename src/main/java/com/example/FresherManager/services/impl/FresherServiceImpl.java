@@ -1,5 +1,7 @@
 package com.example.FresherManager.services.impl;
 
+import com.example.FresherManager.dto.CreateFresherRequest;
+import com.example.FresherManager.models.Center;
 import com.example.FresherManager.models.Fresher;
 import com.example.FresherManager.repositories.FresherRepository;
 import com.example.FresherManager.services.FresherService;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -19,14 +22,20 @@ public class FresherServiceImpl implements FresherService {
 
     @Override
     public Fresher getById(Long id) {
-        return fresherRepository.findById(id).orElse(null);
-    }
+        Optional<Fresher> fresherOptional = fresherRepository.findById(id);
 
+        return fresherOptional.orElse(null);
+    }
 
     @Override
-    public Fresher save(Fresher fresher) {
+    public Fresher save(CreateFresherRequest dto) {
+        Fresher fresher = new Fresher();
+        fresher.setName(dto.getName());
+        fresher.setEmailFresher(dto.getEmailFresher());
+        fresher.setProgramingLanguage(dto.getProgramingLanguage());
         return fresherRepository.save(fresher);
     }
+
 
     @Override
     public Fresher findById(Long id) {
@@ -80,5 +89,11 @@ public class FresherServiceImpl implements FresherService {
         }
         return response;
     }
+
+    @Override
+    public Fresher saveFresher(Fresher updatedFresher) {
+        return fresherRepository.save(updatedFresher);
+    }
+
 
 }

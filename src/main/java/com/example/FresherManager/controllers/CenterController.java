@@ -3,6 +3,7 @@ package com.example.FresherManager.controllers;
 import com.example.FresherManager.models.Center;
 import com.example.FresherManager.services.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,6 +28,16 @@ public class CenterController {
     public Center getCenterById(@PathVariable Long id) {
         return centerService.findById(id);
   }
+
+
+    @GetMapping("/search/name")
+    public ResponseEntity<List<Center>> searchFreshersByName(@RequestParam("name") String name) {
+        List<Center> freshers = centerService.searchFreshersByName(name);
+        if (freshers.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(freshers, HttpStatus.OK);
+    }
 
   @PostMapping("/insert" )
     public Center insertCenter(@RequestBody Center center) {

@@ -6,6 +6,7 @@ import com.example.FresherManager.services.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,6 +36,19 @@ public class CenterServiceImpl implements CenterService {
     @Override
     public void deleteById(Long id) {
         centerRepository.deleteById(id);
+    }
+
+
+    @Override
+    public List<Center> searchFreshersByName(String name) {
+        List<Center> centerList = centerRepository.findAll();
+        List<Center> response = new ArrayList<>();
+        for (Center center : centerList) {
+            if(center.getName().toLowerCase().contains(name.toLowerCase())) {
+                response.add(center);
+            }
+        }
+        return response;
     }
 
 

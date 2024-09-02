@@ -1,5 +1,7 @@
 package com.example.FresherManager.services;
 
+import com.example.FresherManager.dto.BulkCreateProjectRequest;
+import com.example.FresherManager.dto.CreateProjectRequest;
 import com.example.FresherManager.models.Project;
 
 import java.util.List;
@@ -9,9 +11,14 @@ public interface ProjectService {
 
     Project findById(Long id);
 
-    List<Project> findByName();
+    List<Project> findByName(String name);
 
-    Project save(Project projects);
+    Project save(CreateProjectRequest projects);
 
     void deleteById(Long id);
+
+    List<Project> bulkCreteProject(BulkCreateProjectRequest dto);
+
+
+    Project saveProject(Project updatedProject);
 }

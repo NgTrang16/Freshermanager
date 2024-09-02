@@ -1,6 +1,10 @@
 package com.example.FresherManager.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Center")
@@ -12,6 +16,23 @@ public class Center {
     private String name;
     @Column(name = "address", length = 150)
     private String address;
+
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "center_id")
+    private Set<Fresher> freshers;
+
+    public Center(Set<Fresher> freshers) {
+        this.freshers = freshers;
+    }
+
+    public Set<Fresher> getFreshers() {
+        return freshers;
+    }
+
+    public void setFreshers(Set<Fresher> freshers) {
+        this.freshers = freshers;
+    }
 
     public Center() {
     }

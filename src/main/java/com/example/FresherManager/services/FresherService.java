@@ -1,7 +1,7 @@
 package com.example.FresherManager.services;
 
+import com.example.FresherManager.dto.CreateFresherRequest;
 import com.example.FresherManager.models.Fresher;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ public interface FresherService {
 
     Fresher getById(Long id);
 
-    Fresher save(Fresher fresher);
+    Fresher save(CreateFresherRequest dto);
 
     Fresher findById(Long id);
 
@@ -22,5 +22,7 @@ public interface FresherService {
     List<Fresher> searchFreshersByEmailFresher(String emailFresher);
 
     List<Fresher> searchFreshersByLanguage(String programingLanguage);
+
+    Fresher saveFresher(Fresher updatedFresher);
 
 }

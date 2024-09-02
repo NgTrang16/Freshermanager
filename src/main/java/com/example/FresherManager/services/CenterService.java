@@ -13,4 +13,7 @@ public interface CenterService {
     Center save(Center center);
 
     void deleteById(Long id);
+
+
+    List<Center> searchFreshersByName(String name);
 }

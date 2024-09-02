@@ -1,5 +1,7 @@
 package com.example.FresherManager.controllers;
 
+import com.example.FresherManager.dto.BulkCreateProjectRequest;
+import com.example.FresherManager.dto.CreateProjectRequest;
 import com.example.FresherManager.models.Project;
 import com.example.FresherManager.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/project")
+@RequestMapping("api/project")
 public class ProjectController {
     private final ProjectService projectService;
     @Autowired
@@ -18,19 +20,19 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<Project> getAllProjects() {
         return projectService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Project getProjectById(@PathVariable Long id) {
+    public Project getProjectById(@PathVariable(name = "id") Long id) {
         return projectService.findById(id) ;
     }
 
     @GetMapping("search/name")
-    public List<Project> getProjectByName(@RequestParam String name) {
-        List<Project> projects = projectService.findByName();
+    public List<Project> getProjectByName(@RequestParam (name = "name")String name) {
+        List<Project> projects = projectService.findByName(name);
         if(projects.isEmpty()) {
             return null;
         }
@@ -38,36 +40,39 @@ public class ProjectController {
     }
 
     @PostMapping("/insert")
-    Project insertProject(@RequestBody Project project) {
-        return projectService.save(project);
+    Project insertProject(@RequestBody CreateProjectRequest dto) {
+        return projectService.save(dto);
     }
-//
-//    @PutMapping("/{id}")
-//    ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
-//        Optional<Project> projects = Optional.ofNullable(projectService.findById(id));
-//        if(projects.isPresent()) {
-//            Project updatedProject = projects.get();
-//            updatedProject.setName(project.getName());
-//            updatedProject.setManager(project.getManager());
-//            updatedProject.setProgramingLanguage(project.getProgramingLanguage());
-//            updatedProject.setStartDate(project.getStartDate());
-//            updatedProject.setEndDate(project.getEndDate());
-//            updatedProject.setStatus(project.getStatus());
-//            return ResponseEntity.ok(projectService.save(updatedProject));
-//        }
-//        else{
-//            project.setId(id);
-//            return ResponseEntity.ok(projectService.save(project));
-//        }
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public void deleteProject(@PathVariable Long id) {
-//        Project project = projectService.findById(id);
-//        if(project != null) {
-//            projectService.deleteById(id);
-//        }
-//    }
-//
+
+    @PostMapping("/bulk-create")
+    ResponseEntity<List<Project>> bulkCreteProject(@RequestBody BulkCreateProjectRequest dto) {
+        return ResponseEntity.ok(projectService.bulkCreteProject(dto));
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Project> updateProject(@PathVariable(name = "id") Long id, @RequestBody CreateProjectRequest dto) {
+        Optional<Project> project = Optional.ofNullable(projectService.findById(id));
+        if(project.isPresent()) {
+            Project updatedProject = project.get();
+            updatedProject.setName(dto.getName());
+            updatedProject.setManager(dto.getManager());
+            updatedProject.setProgramingLanguage(dto.getProgramingLanguage());
+            updatedProject.setStatus(dto.getStatus());
+            updatedProject.setStartDate(dto.getStartDate());
+            updatedProject.setEndDate(dto.getEndDate());
+            return ResponseEntity.ok(projectService.saveProject(updatedProject));
+        }
+        return ResponseEntity.ok(projectService.save(dto));
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteProject(@PathVariable Long id) {
+        Project project = projectService.findById(id);
+        if (project != null) {
+            projectService.deleteById(id);
+        }
+    }
+
 
 }
