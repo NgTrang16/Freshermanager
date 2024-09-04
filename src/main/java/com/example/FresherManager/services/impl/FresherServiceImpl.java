@@ -1,7 +1,6 @@
 package com.example.FresherManager.services.impl;
 
 import com.example.FresherManager.dto.CreateFresherRequest;
-import com.example.FresherManager.models.Center;
 import com.example.FresherManager.models.Fresher;
 import com.example.FresherManager.repositories.FresherRepository;
 import com.example.FresherManager.services.FresherService;
@@ -35,6 +34,7 @@ public class FresherServiceImpl implements FresherService {
         fresher.setProgramingLanguage(dto.getProgramingLanguage());
         return fresherRepository.save(fresher);
     }
+
 
 
     @Override

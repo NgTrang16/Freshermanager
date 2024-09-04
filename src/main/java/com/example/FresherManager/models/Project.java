@@ -1,8 +1,11 @@
 package com.example.FresherManager.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Project")
@@ -24,6 +27,30 @@ public class Project {
     private String status;
     @Column(name = "programingLanguage", length = 50)
     private String programingLanguage;
+
+    //fresher_project
+    @JsonBackReference
+    @ManyToMany(mappedBy = "projects")
+    private Set<Fresher> freshers = new HashSet<>();
+
+
+    //Center-Project
+    @ManyToOne
+    @JoinColumn(name = "center_id")
+    private Center center;
+
+
+    public Project(Set<Fresher> freshers) {
+        this.freshers = freshers;
+    }
+
+    public Set<Fresher> getFreshers() {
+        return freshers;
+    }
+
+    public void setFreshers(Set<Fresher> freshers) {
+        this.freshers = freshers;
+    }
 
     public Project() {
 

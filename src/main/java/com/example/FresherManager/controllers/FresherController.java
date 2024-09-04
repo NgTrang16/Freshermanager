@@ -30,7 +30,7 @@ public class FresherController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Fresher> getFresherById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(fresherService.getById(id));
+          return ResponseEntity.ok(fresherService.getById(id));
     }
 
     @PostMapping("/insert")

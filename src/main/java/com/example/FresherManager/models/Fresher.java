@@ -3,6 +3,9 @@ package com.example.FresherManager.models;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Fresher")
 public class Fresher {
@@ -15,11 +18,32 @@ public class Fresher {
     private String emailFresher;
     @Column(name = "programming_language", length = 50)
     private String programingLanguage;
-
+//fresher_center
     @JsonBackReference
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Center center;
 
+    //fresher-project
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "fresher_project",
+            joinColumns = {@JoinColumn(name = "fresher_id")},
+            inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    private Set<Project> projects= new HashSet<>();
+
+
+
+    public Fresher(Set<Project> projects) {
+        this.projects = projects;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
 
     public Fresher(Center center) {
         this.center = center;

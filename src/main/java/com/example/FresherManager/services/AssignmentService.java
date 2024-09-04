@@ -1,0 +1,12 @@
+package com.example.FresherManager.services;
+
+import com.example.FresherManager.models.Assignment;
+
+import java.util.List;
+import java.util.Optional;
+
+public interface AssignmentService {
+    List<Assignment> findAll();
+
+    Optional<Assignment> findById(Long id);
+}

@@ -16,12 +16,14 @@ public class Center {
     private String name;
     @Column(name = "address", length = 150)
     private String address;
-
+//fresher-project
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "center_id")
     private Set<Fresher> freshers;
-
+//center-project
+    @OneToMany(mappedBy = "center")
+    private List<Project> projects;
     public Center(Set<Fresher> freshers) {
         this.freshers = freshers;
     }
