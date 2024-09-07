@@ -8,9 +8,13 @@ public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "name", length = 150,unique=true)
     private String name;
+    @Column(name = "score1", length = 150)
     private Float score1;
+    @Column(name = "score2", length = 150)
     private Float score2;
+    @Column(name = "score3", length = 150)
     private Float score3;
 
     public Assignment() {
