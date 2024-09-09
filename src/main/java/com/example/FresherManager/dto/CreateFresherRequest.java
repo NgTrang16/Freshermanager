@@ -1,7 +1,5 @@
 package com.example.FresherManager.dto;
 
-import com.example.FresherManager.models.Assignment;
-
 import java.util.List;
 
 public class CreateFresherRequest {
