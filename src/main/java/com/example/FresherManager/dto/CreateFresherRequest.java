@@ -1,6 +1,6 @@
 package com.example.FresherManager.dto;
 
-import com.example.FresherManager.models.Fresher;
+import com.example.FresherManager.models.Assignment;
 
 import java.util.List;
 
@@ -9,6 +9,19 @@ public class CreateFresherRequest {
         private String name;
         private String emailFresher;
         private String programingLanguage;
+        private List<CreateAssignmentRequest> assignments;
+
+    public CreateFresherRequest(List<CreateAssignmentRequest> assignments) {
+        this.assignments = assignments;
+    }
+
+    public List<CreateAssignmentRequest> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<CreateAssignmentRequest> assignments) {
+        this.assignments = assignments;
+    }
 
     public CreateFresherRequest(String emailFresher, Long id, String name, String programingLanguage) {
         this.emailFresher = emailFresher;

@@ -1,9 +1,10 @@
 package com.example.FresherManager.services.impl;
 
+import com.example.FresherManager.dto.BulkCreateAssignmentRequest;
+import com.example.FresherManager.dto.CreateAssignmentRequest;
 import com.example.FresherManager.models.Assignment;
 import com.example.FresherManager.repositories.AssignmentRepository;
 import com.example.FresherManager.services.AssignmentService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,5 +38,33 @@ public class AssignmentServiceImpl implements AssignmentService {
         }
         return assignments;
     }
+
+    @Override
+    public Assignment save(Assignment assignment) {
+        return assignmentRepository.save(assignment);
+    }
+
+    @Override
+    public void deleteAssignment(Long id) {
+        assignmentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Assignment> bulkCreateAssignment(BulkCreateAssignmentRequest dto) {
+        List<Assignment> assignments = new ArrayList<>();
+        List<CreateAssignmentRequest> assignmentRequests = dto.getAssignments();
+        for (CreateAssignmentRequest assignmentRequest : assignmentRequests) {
+            Assignment assignment = new Assignment();
+            assignment.setId(assignmentRequest.getId());
+            assignment.setName(assignmentRequest.getName());
+            assignment.setScore1(assignmentRequest.getScore1());
+            assignment.setScore2(assignmentRequest.getScore2());
+            assignment.setScore3(assignmentRequest.getScore3());
+            assignments.add(assignment);
+        }
+        return assignmentRepository.saveAll(assignments);
+    }
+
+
 
 }

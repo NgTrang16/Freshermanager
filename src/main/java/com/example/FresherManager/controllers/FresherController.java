@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -88,7 +89,19 @@ public class FresherController {
         return new ResponseEntity<>(freshers, HttpStatus.OK);
     }
 
+//get score by id
+    @GetMapping("/{id}/details")
+    public ResponseEntity<CreateFresherRequest> getFresherDetails(@PathVariable Long id) {
+        CreateFresherRequest dto = fresherService.getFresherWithAverageScores(id);
+        return ResponseEntity.ok(dto);
+    }
 
+
+    @PutMapping("/{fresherId}/center/{centerId}")
+    public ResponseEntity<Fresher> addFresherToCenter(@PathVariable Long fresherId, @PathVariable Long centerId) {
+        Fresher updatedFresher = fresherService.addFresherToCenter(fresherId, centerId);
+        return ResponseEntity.ok(updatedFresher);
+    }
 
 
 

@@ -1,8 +1,9 @@
 package com.example.FresherManager.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class CreateProjectRequest {
+public class CreateProjectRequest implements Serializable {
     private Long id;
     private String name;
     private String manager;

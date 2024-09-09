@@ -32,6 +32,22 @@ public class Fresher {
     private Set<Project> projects= new HashSet<>();
 
 
+    //fresher-assignment
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "fresher_assignment",
+            joinColumns = {@JoinColumn(name = "fresher_id")},
+            inverseJoinColumns = {@JoinColumn(name = "assignment_id")})
+    private Set<Assignment> assignments= new HashSet<>();
+
+    public Set<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(Set<Assignment> assignments) {
+        this.assignments = assignments;
+    }
 
     public Fresher(Set<Project> projects) {
         this.projects = projects;

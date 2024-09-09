@@ -1,6 +1,10 @@
 package com.example.FresherManager.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Assignment")
@@ -16,6 +20,24 @@ public class Assignment {
     private Float score2;
     @Column(name = "score3", length = 150)
     private Float score3;
+
+
+    //fresher-assignment
+    @JsonBackReference
+    @ManyToMany(mappedBy = "assignments")
+    private Set<Fresher> freshers = new HashSet<>();
+
+    public Assignment(Set<Fresher> freshers) {
+        this.freshers = freshers;
+    }
+
+    public Set<Fresher> getFreshers() {
+        return freshers;
+    }
+
+    public void setFreshers(Set<Fresher> freshers) {
+        this.freshers = freshers;
+    }
 
     public Assignment() {
     }
@@ -66,5 +88,9 @@ public class Assignment {
 
     public void setScore3(Float score3) {
         this.score3 = score3;
+    }
+
+    public double calculateAverageScore() {
+        return (score1 + score2 + score3) / 3;
     }
 }

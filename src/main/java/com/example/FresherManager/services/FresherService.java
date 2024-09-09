@@ -4,6 +4,7 @@ import com.example.FresherManager.dto.CreateFresherRequest;
 import com.example.FresherManager.models.Fresher;
 
 import java.util.List;
+import java.util.Map;
 
 public interface FresherService {
 
@@ -25,4 +26,7 @@ public interface FresherService {
 
     Fresher saveFresher(Fresher updatedFresher);
 
+    CreateFresherRequest getFresherWithAverageScores(Long id);
+
+    Fresher addFresherToCenter(Long fresherId, Long centerId);
 }

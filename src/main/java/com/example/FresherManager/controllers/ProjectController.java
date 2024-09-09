@@ -44,7 +44,7 @@ public class ProjectController {
         return projectService.save(dto);
     }
 
-    @PostMapping("/bulk-create")
+    @PostMapping("/bulk")
     ResponseEntity<List<Project>> bulkCreteProject(@RequestBody BulkCreateProjectRequest dto) {
         return ResponseEntity.ok(projectService.bulkCreteProject(dto));
     }
