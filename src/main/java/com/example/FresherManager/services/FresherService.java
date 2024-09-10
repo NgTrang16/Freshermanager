@@ -26,7 +26,7 @@ public interface FresherService {
 
     Fresher saveFresher(Fresher updatedFresher);
 
-    CreateFresherRequest getFresherWithAverageScores(Long id);
+    CreateFresherRequest getFresherWithAverageScores(String id);
 
     Fresher addFresherToCenter(Long fresherId, Long centerId);
 }

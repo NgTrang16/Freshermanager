@@ -154,21 +154,21 @@ LOCK TABLES `Fresher` WRITE;
 INSERT INTO `Fresher` VALUES (2,'Trần Thị Bích','tranthibich@gmail.com','Java',1);
 INSERT INTO `Fresher` VALUES (3,'Lê Văn Cường','levancuong@gmail.com','Java',3);
 INSERT INTO `Fresher` VALUES (4,'Phạm Thị Dung','phamthidung@gmail.com','C#',3);
-INSERT INTO `Fresher` VALUES (5,'Hoàng Văn Đồng','hoangvandong@gmail.com','Python',NULL);
-INSERT INTO `Fresher` VALUES (7,'Bùi Thị Hoa','buithihoa@gmail.com','C',NULL);
-INSERT INTO `Fresher` VALUES (8,'Trần Thị Lan','tranthilan@gmail.com','C++',NULL);
-INSERT INTO `Fresher` VALUES (9,'Lê Văn Hùng','levanhung@gmail.com','C',NULL);
-INSERT INTO `Fresher` VALUES (10,'Nguyễn Văn Tùng','tung@gmail.com','C',NULL);
-INSERT INTO `Fresher` VALUES (11,'Phạm Văn Khải','phamvankhai@gmail.com','JavaScipt',NULL);
-INSERT INTO `Fresher` VALUES (12,'Nguyễn Thị Mai','nguyenthimai@gmail.com','Python',NULL);
-INSERT INTO `Fresher` VALUES (13,'Trần Văn Bình','tranvanbinh@gmail.com','Java',NULL);
-INSERT INTO `Fresher` VALUES (14,'Lê Thị Thu','lethithu@gmail.com','C++',NULL);
-INSERT INTO `Fresher` VALUES (15,'Ngô Văn Đức','ngovanduc@gmail.com','C#',NULL);
-INSERT INTO `Fresher` VALUES (16,'Trịnh Thị Yến','trinhthiyen@gmail.com','Swift',NULL);
-INSERT INTO `Fresher` VALUES (17,'Đỗ Văn Khoa','dovankhoa@gmail.com','PHP',NULL);
-INSERT INTO `Fresher` VALUES (18,'Phan Thị Phương','phanthiphuong@gmail.com','Go',NULL);
-INSERT INTO `Fresher` VALUES (19,'Vũ Văn Minh','vuvanminh@gmail.com','Kotlin',NULL);
-INSERT INTO `Fresher` VALUES (20,'Lê Thị Hiền','lethihien@gmail.com','JavaScript',NULL);
+INSERT INTO `Fresher` VALUES (5,'Hoàng Văn Đồng','hoangvandong@gmail.com','Python',4);
+INSERT INTO `Fresher` VALUES (7,'Bùi Thị Hoa','buithihoa@gmail.com','C',4);
+INSERT INTO `Fresher` VALUES (8,'Trần Thị Lan','tranthilan@gmail.com','C++',5);
+INSERT INTO `Fresher` VALUES (9,'Lê Văn Hùng','levanhung@gmail.com','C',6);
+INSERT INTO `Fresher` VALUES (10,'Nguyễn Văn Tùng','tung@gmail.com','C',7);
+INSERT INTO `Fresher` VALUES (11,'Phạm Văn Khải','phamvankhai@gmail.com','JavaScipt',3);
+INSERT INTO `Fresher` VALUES (12,'Nguyễn Thị Mai','nguyenthimai@gmail.com','Python',9);
+INSERT INTO `Fresher` VALUES (13,'Trần Văn Bình','tranvanbinh@gmail.com','Java',10);
+INSERT INTO `Fresher` VALUES (14,'Lê Thị Thu','lethithu@gmail.com','C++',2);
+INSERT INTO `Fresher` VALUES (15,'Ngô Văn Đức','ngovanduc@gmail.com','C#',2);
+INSERT INTO `Fresher` VALUES (16,'Trịnh Thị Yến','trinhthiyen@gmail.com','Swift',2);
+INSERT INTO `Fresher` VALUES (17,'Đỗ Văn Khoa','dovankhoa@gmail.com','PHP',2);
+INSERT INTO `Fresher` VALUES (18,'Phan Thị Phương','phanthiphuong@gmail.com','Go',3);
+INSERT INTO `Fresher` VALUES (19,'Vũ Văn Minh','vuvanminh@gmail.com','Kotlin',8);
+INSERT INTO `Fresher` VALUES (20,'Lê Thị Hiền','lethihien@gmail.com','JavaScript',8);
 /*!40000 ALTER TABLE `Fresher` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -195,6 +195,8 @@ CREATE TABLE `fresher_assignment` (
 
 LOCK TABLES `fresher_assignment` WRITE;
 /*!40000 ALTER TABLE `fresher_assignment` DISABLE KEYS */;
+INSERT INTO `fresher_assignment` VALUES (2,4);
+INSERT INTO `fresher_assignment` VALUES (2,6);
 /*!40000 ALTER TABLE `fresher_assignment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,6 +223,11 @@ CREATE TABLE `fresher_project` (
 
 LOCK TABLES `fresher_project` WRITE;
 /*!40000 ALTER TABLE `fresher_project` DISABLE KEYS */;
+INSERT INTO `fresher_project` VALUES (2,4);
+INSERT INTO `fresher_project` VALUES (3,4);
+INSERT INTO `fresher_project` VALUES (2,5);
+INSERT INTO `fresher_project` VALUES (3,6);
+INSERT INTO `fresher_project` VALUES (4,7);
 /*!40000 ALTER TABLE `fresher_project` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,4 +292,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-09-08 22:33:02
+-- Dump completed on 2024-09-11  2:39:29

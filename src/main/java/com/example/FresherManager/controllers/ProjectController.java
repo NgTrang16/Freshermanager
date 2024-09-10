@@ -2,11 +2,14 @@ package com.example.FresherManager.controllers;
 
 import com.example.FresherManager.dto.BulkCreateProjectRequest;
 import com.example.FresherManager.dto.CreateProjectRequest;
+import com.example.FresherManager.models.Fresher;
 import com.example.FresherManager.models.Project;
 import com.example.FresherManager.services.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -34,7 +37,7 @@ public class ProjectController {
     public List<Project> getProjectByName(@RequestParam (name = "name")String name) {
         List<Project> projects = projectService.findByName(name);
         if(projects.isEmpty()) {
-            return null;
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
         return projects;
     }

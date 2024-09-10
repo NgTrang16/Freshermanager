@@ -57,8 +57,8 @@ public class FresherController {
     }
     // search by name
     @GetMapping("/search/name")
-    public ResponseEntity<List<Fresher>> searchFreshersByName(@RequestParam("name") String name, @RequestParam("id") String id) {
-        log.info(id);
+    public ResponseEntity<List<Fresher>> searchFreshersByName(@RequestParam("name") String name) {
+        //log.info(id);
         List<Fresher> freshers = fresherService.searchFreshersByName(name);
         if (freshers.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -88,13 +88,13 @@ public class FresherController {
     }
 
 //get score by id
-    @GetMapping("/{id}/details")
-    public ResponseEntity<CreateFresherRequest> getFresherDetails(@PathVariable Long id) {
+    @GetMapping("/score/{id}")
+    public ResponseEntity<CreateFresherRequest> getFresherDetails(@PathVariable String id) {
         CreateFresherRequest dto = fresherService.getFresherWithAverageScores(id);
         return ResponseEntity.ok(dto);
     }
 
-
+//add fresher to center
     @PutMapping("/{fresherId}/center/{centerId}")
     public ResponseEntity<Fresher> addFresherToCenter(@PathVariable Long fresherId, @PathVariable Long centerId) {
         Fresher updatedFresher = fresherService.addFresherToCenter(fresherId, centerId);

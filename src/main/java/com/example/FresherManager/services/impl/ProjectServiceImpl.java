@@ -30,13 +30,13 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public List<Project> findByName(String name) {
         List<Project> projects = projectRepository.findAll();
-        List<Project> filteredProjects = new ArrayList<>();
+        List<Project>  projects1 = new ArrayList<>();
         for (Project project : projects) {
-            if (project.getName().toLowerCase().contains(project.getName().toLowerCase())) {
-                filteredProjects.add(project);
+            if (project.getName().toLowerCase().contains(name.toLowerCase())) {
+                projects1.add(project);
             }
         }
-        return filteredProjects;
+        return projects1;
     }
 
     @Override

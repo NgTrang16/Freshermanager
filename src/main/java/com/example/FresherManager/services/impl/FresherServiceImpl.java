@@ -2,11 +2,14 @@ package com.example.FresherManager.services.impl;
 
 import com.example.FresherManager.dto.CreateAssignmentRequest;
 import com.example.FresherManager.dto.CreateFresherRequest;
+import com.example.FresherManager.exceptions.FresherManagerException;
 import com.example.FresherManager.models.Center;
 import com.example.FresherManager.models.Fresher;
 import com.example.FresherManager.repositories.CenterRepository;
 import com.example.FresherManager.repositories.FresherRepository;
 import com.example.FresherManager.services.FresherService;
+import com.example.FresherManager.utils.Common;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Service
 public class FresherServiceImpl implements FresherService {
     private final FresherRepository fresherRepository;
@@ -28,7 +31,9 @@ public class FresherServiceImpl implements FresherService {
     @Override
     public Fresher getById(Long id) {
         Optional<Fresher> fresherOptional = fresherRepository.findById(id);
-
+        if(fresherOptional.isEmpty()) {
+            log.info("Fresher {} not found", id);
+        }
         return fresherOptional.orElse(null);
     }
 
@@ -103,8 +108,12 @@ public class FresherServiceImpl implements FresherService {
 
 
     @Override
-    public CreateFresherRequest getFresherWithAverageScores(Long id) {
-        Fresher fresher = fresherRepository.findById(id)
+    public CreateFresherRequest getFresherWithAverageScores(String id) {
+        if(!Common.isNumeric(id)){
+            log.info("Id {} is not numeric ", id);
+            throw new FresherManagerException("Id is not numeric");
+        }
+        Fresher fresher = fresherRepository.findById(Long.valueOf(id))
                 .orElseThrow(() -> new RuntimeException("Fresher not found"));
 
         // Create Assignmentdto
@@ -132,10 +141,10 @@ public class FresherServiceImpl implements FresherService {
     @Override
     public Fresher addFresherToCenter(Long fresherId, Long centerId) {
         Fresher fresher = fresherRepository.findById(fresherId)
-                .orElseThrow(() -> new RuntimeException("Fresher not found"));
+                .orElseThrow(() -> new FresherManagerException("Fresher not found"));
 
         Center center = centerRepository.findById(centerId)
-                .orElseThrow(() -> new RuntimeException("Center not found"));
+                .orElseThrow(() -> new FresherManagerException("Center not found"));
 
         fresher.setCenter(center);
         return fresherRepository.save(fresher);

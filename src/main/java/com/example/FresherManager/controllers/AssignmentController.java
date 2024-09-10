@@ -1,6 +1,7 @@
 package com.example.FresherManager.controllers;
 
 import com.example.FresherManager.dto.BulkCreateAssignmentRequest;
+import com.example.FresherManager.dto.CreateAssignmentRequest;
 import com.example.FresherManager.models.Assignment;
 import com.example.FresherManager.services.AssignmentService;
 import org.springframework.http.HttpStatus;
@@ -41,8 +42,24 @@ public class AssignmentController {
         return new ResponseEntity<>(assignments, HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Assignment> updateAssignment(@PathVariable(name = "id") Long id, @RequestBody CreateAssignmentRequest dto) {
+        Optional<Assignment> assignment = assignmentService.findById(id);
+        if (assignment.isPresent()) {
+            Assignment Updatedassign = assignment.get();
+            Updatedassign.setName(dto.getName());
+            Updatedassign.setScore1(dto.getScore1());
+            Updatedassign.setScore2(dto.getScore2());
+            Updatedassign.setScore3(dto.getScore3());
+            return ResponseEntity.ok(assignmentService.save(Updatedassign));
+        }
+        return ResponseEntity.ok(assignmentService.save(dto));
+    }
 
-    @PostMapping("/insert")
+
+
+
+@PostMapping("/insert")
     public Assignment createAssignment(@PathVariable Long id, @RequestBody Assignment assignment) {
         boolean exists = assignmentService.findById(id).isPresent();
         if(exists) {

@@ -1,9 +1,8 @@
 package com.example.FresherManager.services;
 
 import com.example.FresherManager.dto.BulkCreateAssignmentRequest;
+import com.example.FresherManager.dto.CreateAssignmentRequest;
 import com.example.FresherManager.models.Assignment;
-import com.example.FresherManager.models.Project;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,4 +21,5 @@ public interface AssignmentService {
     List<Assignment> bulkCreateAssignment(BulkCreateAssignmentRequest dto);
 
 
+    Assignment save(CreateAssignmentRequest dto);
 }

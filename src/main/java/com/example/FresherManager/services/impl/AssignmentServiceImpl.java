@@ -2,7 +2,9 @@ package com.example.FresherManager.services.impl;
 
 import com.example.FresherManager.dto.BulkCreateAssignmentRequest;
 import com.example.FresherManager.dto.CreateAssignmentRequest;
+import com.example.FresherManager.dto.CreateProjectRequest;
 import com.example.FresherManager.models.Assignment;
+import com.example.FresherManager.models.Project;
 import com.example.FresherManager.repositories.AssignmentRepository;
 import com.example.FresherManager.services.AssignmentService;
 import org.springframework.stereotype.Service;
@@ -65,6 +67,15 @@ public class AssignmentServiceImpl implements AssignmentService {
         return assignmentRepository.saveAll(assignments);
     }
 
+    @Override
+    public Assignment save(CreateAssignmentRequest dto) {
+       Assignment assignment = new Assignment();
+       assignment.setName(dto.getName());
+       assignment.setScore1(dto.getScore1());
+       assignment.setScore2(dto.getScore2());
+       assignment.setScore3(dto.getScore3());
+       return assignmentRepository.save(assignment);
+    }
 
 
 }
